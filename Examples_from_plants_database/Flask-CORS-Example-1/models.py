@@ -7,7 +7,7 @@ from sqlalchemy.sql.schema import PrimaryKeyConstraint
 database_name = "plantsdb"
 # Feel free to remove the password argument from the below format() method
 database_path = "postgresql://{}:{}@{}/{}".format(
-    "postgres", "", "localhost:5432", database_name
+    "postgres", "password123!", "localhost:5432", database_name
 )
 db = SQLAlchemy()
 
@@ -32,27 +32,22 @@ class Plant(db.Model):
     is_poisonous = Column(Boolean)
     primary_color = Column(String)
 
-
     def __init__(self, name, scientific_name, is_poisonous, primary_color):
         self.name = name
         self.scientific_name = scientific_name
         self.is_poisonous = is_poisonous
         self.primary_color = primary_color
 
-
     def insert(self):
         db.session.add(self)
         db.session.commit()
 
-
     def update(self):
         db.session.commit()
-
 
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
 
     def format(self):
         return {

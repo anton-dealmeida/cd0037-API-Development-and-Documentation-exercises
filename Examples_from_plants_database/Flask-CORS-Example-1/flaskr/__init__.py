@@ -20,7 +20,7 @@ def create_app(test_config=None):
         return response
 
     @app.route("/plants", methods=["GET", "POST"])
-    # @cross_origin
+    @cross_origin()
     def get_plants():
         # Implement pagniation
         page = request.args.get("page", 1, type=int)
@@ -44,5 +44,10 @@ def create_app(test_config=None):
             abort(404)
         else:
             return jsonify({"success": True, "plant": plant.format()})
+
+    @app.route("/")
+    @cross_origin()
+    def hello_world():
+        return jsonify({"success": True, "message": "Hello, World!"})
 
     return app

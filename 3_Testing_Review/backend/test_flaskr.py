@@ -15,11 +15,12 @@ class BookTestCase(unittest.TestCase):
         self.client = self.app.test_client
         self.database_name = "bookshelf_test"
         self.database_path = "postgresql://{}:{}@{}/{}".format(
-            "student", "student", "localhost:5432", self.database_name
+            "postgres", "password123!", "localhost:5432", self.database_name
         )
         setup_db(self.app, self.database_path)
 
-        self.new_book = {"title": "Anansi Boys", "author": "Neil Gaiman", "rating": 5}
+        self.new_book = {"title": "Anansi Boys",
+                         "author": "Neil Gaiman", "rating": 5}
 
     def tearDown(self):
         """Executed after reach test"""

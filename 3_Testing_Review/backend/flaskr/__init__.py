@@ -1,10 +1,10 @@
 import os
-from flask import Flask, request, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy  # , or_
-from flask_cors import CORS
 import random
 
-from models import setup_db, Book
+from flask import Flask, abort, jsonify, request
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy  # , or_
+from models import Book, setup_db
 
 BOOKS_PER_SHELF = 8
 
@@ -131,14 +131,16 @@ def create_app(test_config=None):
     @app.errorhandler(404)
     def not_found(error):
         return (
-            jsonify({"success": False, "error": 404, "message": "resource not found"}),
+            jsonify({"success": False, "error": 404,
+                    "message": "resource not found"}),
             404,
         )
 
     @app.errorhandler(422)
     def unprocessable(error):
         return (
-            jsonify({"success": False, "error": 422, "message": "unprocessable"}),
+            jsonify({"success": False, "error": 422,
+                    "message": "unprocessable"}),
             422,
         )
 
@@ -149,7 +151,8 @@ def create_app(test_config=None):
     @app.errorhandler(405)
     def not_found(error):
         return (
-            jsonify({"success": False, "error": 405, "message": "method not allowed"}),
+            jsonify({"success": False, "error": 405,
+                    "message": "method not allowed"}),
             405,
         )
 
